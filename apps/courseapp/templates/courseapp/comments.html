@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses - comments</title>
+    {% include "./header.html" %}
+  </head>
+  <body>
+    <div class="container">
+
+
+    <h1>Comments time!!! Never read the comments.</h1>
+    <div class="top">
+      <h3>The course: <span class="coursename">{{course.name}}</span></h3>
+      {% if course.description.text %}
+      <h4>A course described as: {{course.description.text}}</h4>
+      {% else %}
+      <h4>A course that words cannot describe.</h4>
+      {% endif %}
+
+    </div>
+
+
+    {% if comments %}
+    <table class="table table-striped">
+      <thead>
+        <th>Comment</th>
+        <th>Commenter</th>
+        <th>Date</th>
+      </thead>
+      <tbody>
+        {% for comment in comments %}
+        <tr>
+          <td>{{comment.comment}}</td>
+          <td>{{comment.commenter}}</td>
+          <td>{{comment.created_at}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    <h3>Add a comment of your own!</h3>
+    <form action="/addComment" method="post" class="borderform">
+      {% csrf_token %}
+      <input type="hidden" name="courseid" value="{{course.id}}" />
+      <div class="form-group">
+        <label for="comment">My comment:</label>
+        <textarea name="comment" rows="4" cols="25" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">I have things to say!!</button>
+    </form>
+
+    <p>
+      <a href="/">Return to the main page</a>
+    </p>
+
+  </body>
+  </div>
+</html>

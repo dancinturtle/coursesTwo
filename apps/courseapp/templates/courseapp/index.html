@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    {% include "./header.html" %}
+  </head>
+  <body>
+    <div class="container">
+
+
+    <h1>Courses</h1>
+
+    <h3>Add a new course</h3>
+    <form action="/create" method="post" >
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input class="form-control" type="text" name="name" />
+      </div>
+      <div class="form-group">
+        <label for="desc">Description:</label>
+        <textarea  class="form-control" name="desc" rows="4" cols="40"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add a course!</button>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+
+        <tr>
+          <td>{{course.name}}</td>
+          {% if course.description.text %}
+          <td>{{course.description.text}}</td>
+          {% else %}
+          <td>
+            No description provided
+          </td>
+          {% endif %}
+          <td>{{course.created_at}}</td>
+          <td><a href="/courses/destroy/{{course.id}}">Remove</a></td>
+          <td>
+            <a href = "/courses/comment/{{course.id}}">View comments</a>
+          </td>
+        </tr>
+
+        {% endfor %}
+
+
+        <!-- <tr>
+          <td>How to fly</td>
+          <td></td>
+          <td>Nov 1st 2013 11:12 AM</td>
+          <td><a href="#">remove</a></td>
+        </tr>
+        <tr>
+          <td>How to get more energy in the bootcamp</td>
+          <td></td>
+          <td>Nov 1st 2013 11:12 AM</td>
+          <td><a href="#">remove</a></td>
+        </tr> -->
+      </tbody>
+    </table>
+
+  </body>
+  </div>
+</html>

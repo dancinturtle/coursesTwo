@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses - Delete</title>
+    {% include "./header.html" %}
+  </head>
+  <body>
+    <div class="container">
+
+
+    <h1>Are you sure you want to delete the following course?</h1>
+    <h2>Name:</h2>
+    <p>
+      {{doomed.name}}
+    </p>
+    <h2>Description:</h2>
+    {% if doomed.description.text %}
+    <p>
+    {{doomed.description.text}}
+    </p>
+    {% else %}
+    <p>
+      No description provided, toooo lazy.
+    </p>
+    {% endif %}
+    <form action="/" method = "get">
+      <input type="submit" value="no." />
+    </form>
+    <form action="/delete/{{doomed.id}}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="yes I want to delete this" / >
+    </form>
+  </body>
+  </div>
+</html>

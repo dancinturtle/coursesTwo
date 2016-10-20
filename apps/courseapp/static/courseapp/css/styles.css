@@ -1,0 +1,16 @@
+h1 {
+  color: blue;
+}
+
+.top {
+  text-align: center;
+}
+.borderform {
+  width: 50%;
+  padding: 15px;
+  border: 3px solid grey;
+  border-radius: 10px;
+}
+.coursename {
+  color: #581845;
+}
