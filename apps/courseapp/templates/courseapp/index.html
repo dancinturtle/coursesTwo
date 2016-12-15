@@ -10,7 +10,13 @@
 
 
     <h1>Courses</h1>
-
+    {% if messages %}
+    {% for msg in messages %}
+    <p {% if msg.tags %} class="{{msg.tags}}" {% endif %}>
+      {{msg}}
+    </p>
+    {% endfor %}
+    {% endif %}
     <h3>Add a new course</h3>
     <form action="/create" method="post" >
       {% csrf_token %}

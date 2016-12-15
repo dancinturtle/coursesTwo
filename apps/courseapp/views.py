@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Course, Description, Comment
+from django.contrib import messages
 # Create your views here.
 def index(request):
     context = {
@@ -27,7 +28,9 @@ def confirmDelete(request, id):
 
 def delete(request, id):
 
-    course = Course.objects.get(id=id).delete()
+    course = Course.objects.get(id=id)
+    messages.warning(request, "The course '{}' has been deleted.".format(course.name))
+    course.delete()
     return redirect ('/')
 
 def viewComments(request, id):
